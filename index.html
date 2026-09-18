@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f7b9c5" />
+  <title>Canım Teyzem ❤️</title>
+  <style>
+    :root { --ink:#513a51; --paper:#fff8ed; --rose:#f690ad; --pink:#ffd0db; --peach:#ffc98b; --lilac:#d8c8ff; --mint:#bfe8d7; --gold:#ffc94f; }
+    * { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+    html,body { width:100%; height:100%; margin:0; overflow:hidden; background:#f5bdd0; font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif; color:var(--ink); }
+    button { font:inherit; cursor:pointer; border:0; touch-action:manipulation; }
+    #app { position:relative; width:100%; height:100%; max-width:560px; margin:auto; overflow:hidden; isolation:isolate; background:linear-gradient(155deg,#fff3dc 0%,#ffdce3 46%,#e6d7ff 100%); }
+    #app:before { content:""; position:absolute; inset:0; opacity:.22; pointer-events:none; z-index:8; background-image:radial-gradient(#b77b8e .65px,transparent .9px),radial-gradient(#fff .65px,transparent .9px); background-size:7px 7px,11px 11px; background-position:0 0,3px 5px; mix-blend-mode:multiply; }
+    #app:after { content:""; position:absolute; inset:10px; border:2px solid rgba(111,65,98,.2); border-radius:32px 23px 35px 27px; pointer-events:none; z-index:7; transform:rotate(-.25deg); }
+    .scene { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:clamp(24px,7vh,68px) 24px max(28px,env(safe-area-inset-bottom)); text-align:center; opacity:0; visibility:hidden; transform:scale(1.045); transition:opacity .75s ease, transform .75s cubic-bezier(.2,.8,.3,1),visibility 0s .75s; }
+    .scene.active { opacity:1; visibility:visible; transform:scale(1); transition-delay:0s; }
+    .scene.warm { background:radial-gradient(circle at 50% 16%,#fffbdc 0 3%,transparent 26%),linear-gradient(160deg,#fff1ca,#ffd9cc 55%,#f1c9e9); }
+    .scene.cake-scene { background:radial-gradient(circle at 50% 15%,#fffef1 0,transparent 27%),linear-gradient(180deg,#cdefff 0%,#ece1ff 57%,#ffc7d4 100%); }
+    .scene.message-scene { justify-content:flex-start; overflow:auto; scrollbar-width:none; background:linear-gradient(150deg,#fff8df,#ffe9f1 58%,#e2dcff); padding-top:max(52px,env(safe-area-inset-top)); }
+    .scene.final-scene { background:radial-gradient(circle at 50% 20%,#fff9c8 0,transparent 25%),linear-gradient(150deg,#f9c2d3,#e9d4ff 56%,#bde8e0); }
+    .scene.message-scene::-webkit-scrollbar { display:none; }
+    h1,h2,p { margin:0; }
+    .eyebrow { font-size:14px; letter-spacing:1.5px; font-weight:800; color:#a65d76; text-transform:uppercase; margin-bottom:14px; }
+    h1 { font-family:Georgia,"Times New Roman",serif; font-size:clamp(42px,12vw,62px); line-height:1.04; color:#7d425d; text-shadow:2px 2px 0 #fff7e9,4px 4px 0 rgba(125,66,93,.13); transform:rotate(-1deg); }
+    h2 { font-family:Georgia,serif; font-size:clamp(27px,8vw,40px); line-height:1.1; color:#70405c; text-shadow:1px 2px #fff; }
+    .sub { margin-top:21px; max-width:310px; font-size:18px; line-height:1.5; font-weight:600; color:#795468; }
+    .hand { font-family:"Comic Sans MS","Trebuchet MS",cursive; }
+    .start-btn { position:relative; z-index:10; margin-top:35px; padding:16px 27px; border-radius:18px 22px 17px 21px; color:#fffdf6; font-weight:900; font-size:18px; background:linear-gradient(135deg,#ed6e98,#d85f89); box-shadow:0 8px 0 #b64870,0 14px 26px rgba(147,55,90,.25); transform:rotate(-1.2deg); transition:transform .15s,box-shadow .15s; }
+    .start-btn:active { transform:translateY(6px) rotate(-1.2deg); box-shadow:0 2px 0 #b64870,0 7px 15px rgba(147,55,90,.2); }
+    .flower { position:absolute; width:48px; height:48px; animation:float 5s ease-in-out infinite; }
+    .flower i { position:absolute; left:16px; top:16px; width:17px; height:17px; border-radius:50%; background:var(--gold); z-index:2; border:2px solid rgba(81,58,81,.16); }
+    .flower b { position:absolute; width:23px; height:23px; border-radius:55% 45% 50% 45%; background:#ffb7d0; border:2px solid rgba(81,58,81,.16); }
+    .flower b:nth-child(1){left:13px;top:0}.flower b:nth-child(2){right:0;top:13px}.flower b:nth-child(3){left:13px;bottom:0}.flower b:nth-child(4){left:0;top:13px}
+    .balloon { position:absolute; width:56px; height:70px; border-radius:50% 50% 48% 48%; border:2px solid rgba(81,58,81,.24); box-shadow:inset -8px -10px 0 rgba(255,255,255,.2); animation:balloon 4.6s ease-in-out infinite; }
+    .balloon:after { content:""; position:absolute; height:51px; width:1px; background:rgba(81,58,81,.45); top:67px; left:27px; transform-origin:top; transform:rotate(8deg); }
+    .balloon:before { content:""; position:absolute; width:11px; height:9px; background:inherit; border:inherit; border-radius:2px; bottom:-5px; left:20px; transform:rotate(45deg); }
+    .doodle { position:absolute; font-size:32px; opacity:.82; animation:float 4s ease-in-out infinite; filter:drop-shadow(1px 2px 0 rgba(81,58,81,.12)); }
+    .doodle.star { color:#ffbd43; }.doodle.heart { color:#ef7196; }
+    @keyframes float { 50% { transform:translateY(-13px) rotate(7deg); } }
+    @keyframes balloon { 50% { transform:translate(-9px,-17px) rotate(-5deg); } }
+    .intro-line { width:54px; height:4px; margin:19px 0 2px; border-radius:50%; background:#e87e9c; transform:rotate(-2deg); }
+    .transition-copy { transform:rotate(-1.5deg); max-width:350px; }
+    .sticker-row { position:relative; width:280px; height:125px; margin:18px 0 24px; }
+    .sticker { position:absolute; border:2px solid rgba(81,58,81,.2); box-shadow:3px 4px 0 rgba(81,58,81,.12); display:grid; place-items:center; background:#fff8df; animation:pop .7s both; }
+    .sticker:nth-child(1){width:74px;height:74px;left:8px;top:16px;border-radius:48% 52% 52% 45%;transform:rotate(-13deg);font-size:39px;animation-delay:.1s}.sticker:nth-child(2){width:86px;height:77px;left:96px;top:0;border-radius:47% 54% 43% 58%;transform:rotate(6deg);font-size:42px;animation-delay:.25s}.sticker:nth-child(3){width:72px;height:72px;right:7px;top:25px;border-radius:53% 47% 56% 44%;transform:rotate(11deg);font-size:36px;animation-delay:.4s}
+    @keyframes pop { from{opacity:0;scale:.2} 70%{scale:1.12} to{opacity:1;scale:1} }
+    .cake-wrap { width:min(92vw,390px); height:340px; margin-top:3px; animation:cakeIn 1.25s cubic-bezier(.22,1.25,.4,1) both; }
+    @keyframes cakeIn { from { opacity:0; transform:translateY(100px) rotate(4deg) scale(.65); } to { opacity:1; transform:none; } }
+    .cake-wrap svg { width:100%; height:100%; overflow:visible; filter:drop-shadow(0 14px 10px rgba(101,66,99,.2)); }
+    .flame { transform-origin:center bottom; animation:flicker .8s ease-in-out infinite alternate; }
+    .flame.f2{animation-delay:-.4s}.flame.f3{animation-delay:-.15s}
+    @keyframes flicker { to { transform:scale(.75,1.12) rotate(4deg); opacity:.86; } }
+    .cake-prompt { margin-top:-10px; font-size:22px; font-weight:900; color:#75455e; text-shadow:1px 1px white; animation:pulse 1.8s ease-in-out infinite; }
+    .cake-hint { margin-top:8px; font-size:15px; font-weight:700; color:#966478; }
+    @keyframes pulse { 50% { transform:scale(1.045); } }
+    .tap-zone { position:absolute; inset:13% 4% 15%; z-index:3; background:transparent; }
+    .cake-scene.blown .flame { animation:out .45s forwards; }
+    @keyframes out { to { opacity:0; transform:scale(.05) translateY(-17px); } }
+    .smoke { opacity:0; }.cake-scene.blown .smoke { animation:smoke 1.4s ease-out forwards; }
+    @keyframes smoke { 0%{opacity:0;transform:translateY(0) scale(.3)} 20%{opacity:.7} 100%{opacity:0;transform:translateY(-55px) translateX(12px) scale(1.3)} }
+    .message-card { width:min(100%,410px); margin:auto 0; padding:28px 24px 31px; background:rgba(255,252,239,.76); border:2px solid rgba(118,75,98,.17); border-radius:28px 22px 30px 24px; box-shadow:8px 11px 0 rgba(161,96,131,.11),0 14px 38px rgba(129,75,111,.14); transform:rotate(-.35deg); }
+    .message-card:before { content:""; display:block; height:5px; width:48px; margin:0 auto 16px; background:#ee84a4; border-radius:50%; }
+    #letter { text-align:left; font-size:clamp(16px,4.35vw,18px); line-height:1.62; font-weight:600; color:#67485a; white-space:pre-line; }
+    .typed-line { display:block; overflow:hidden; opacity:0; animation:reveal .65s forwards; }
+    @keyframes reveal { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+    .next-gift { margin-top:25px; opacity:0; animation:reveal .7s .5s forwards; color:#a65a77; font-weight:800; font-size:15px; }
+    .gift-stage { min-height:430px; width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+    .gift-label { font-size:20px; font-weight:900; color:#7d425d; margin-bottom:18px; }
+    .gift { position:relative; width:170px; height:145px; cursor:pointer; filter:drop-shadow(0 16px 10px rgba(99,55,86,.23)); transition:transform .2s; }
+    .gift:active { transform:scale(.96); }.gift-base { position:absolute; left:10px; right:10px; bottom:0; height:112px; border:3px solid #70435c; border-radius:14px 15px 22px 18px; background:linear-gradient(135deg,#ff94b3,#ee5f8c); overflow:hidden; }.gift-base:before,.gift-base:after { content:""; position:absolute; background:#ffe79f; }.gift-base:before { top:0; bottom:0; left:67px; width:31px; border-left:2px solid #70435c; border-right:2px solid #70435c; }.gift-base:after { width:100%; height:27px; top:42px; border-top:2px solid #70435c; border-bottom:2px solid #70435c; }
+    .lid { position:absolute; left:0; right:0; top:24px; height:45px; border:3px solid #70435c; border-radius:16px 19px 10px 12px; background:#f879a5; z-index:2; transform-origin:15% 94%; transition:transform .85s cubic-bezier(.2,.9,.25,1.3); }.lid:before {content:"";position:absolute;left:68px;top:-3px;bottom:-3px;width:32px;background:#ffe69a;border-left:2px solid #70435c;border-right:2px solid #70435c}.bow { position:absolute; z-index:3; width:36px;height:25px;top:7px;border:3px solid #70435c;background:#ffe69a;border-radius:60% 18% 60% 18%; }.bow.left{left:51px;transform:rotate(-24deg)}.bow.right{right:50px;transform:scaleX(-1) rotate(-24deg)}
+    .final-message { width:min(100%,405px); opacity:0; transform:translateY(15px) scale(.95); transition:.8s cubic-bezier(.2,.85,.35,1.15); pointer-events:none; }.final-message.show{opacity:1;transform:none;pointer-events:auto}.final-message p{font-size:18px;line-height:1.55;font-weight:700;color:#70445d;text-shadow:1px 1px #fff}.big-final{margin-top:23px;font-family:Georgia,serif;font-size:clamp(29px,9vw,43px);line-height:1.04;color:#e35383;text-shadow:2px 2px #fff5d6,4px 4px 0 rgba(139,62,94,.14);transform:rotate(-1deg)}.opened .lid{transform:rotate(-112deg) translate(-4px,-17px)}.opened .gift{animation:giftJump .7s ease}.opened .gift-label{opacity:0;transition:.25s}@keyframes giftJump{45%{transform:translateY(-25px)}70%{transform:translateY(0) scale(1.06)}}
+    #fx { position:absolute; inset:0; pointer-events:none; z-index:12; width:100%; height:100%; }
+    .sound-toggle { position:absolute; z-index:20; top:max(18px,env(safe-area-inset-top)); right:18px; width:43px; height:43px; border:2px solid rgba(112,67,92,.24); border-radius:50%; background:rgba(255,250,236,.88); box-shadow:2px 3px 0 rgba(112,67,92,.12); font-size:19px; }
+    .sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
+    @media (max-height:670px){ h1{font-size:38px}.sub{font-size:16px;margin-top:13px}.start-btn{margin-top:22px}.cake-wrap{height:278px}.cake-prompt{margin-top:-23px}.gift-stage{min-height:360px}.message-card{padding:20px}.scene.message-scene{padding-top:30px} }
+    @media (prefers-reduced-motion:reduce){ *,*:before,*:after { animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; } }
+  </style>
+</head>
+<body>
+  <main id="app" aria-live="polite">
+    <canvas id="fx" aria-hidden="true"></canvas>
+    <button class="sound-toggle" id="soundToggle" type="button" aria-label="Sesleri aç veya kapat">🔊</button>
+    <section class="scene warm active" id="scene1" aria-label="Açılış">
+      <div class="balloon" style="background:#aee0d4;left:-10px;top:13%;animation-delay:-2s"></div><div class="balloon" style="background:#f99bb5;right:-12px;top:26%;animation-delay:-.6s"></div>
+      <div class="flower" style="left:10%;bottom:13%;animation-delay:-1s"><b></b><b></b><b></b><b></b><i></i></div><div class="flower" style="right:11%;bottom:16%;transform:scale(.72) rotate(12deg);animation-delay:-3s"><b></b><b></b><b></b><b></b><i></i></div>
+      <span class="doodle heart" style="left:18%;top:26%">♥</span><span class="doodle star" style="right:18%;top:17%;font-size:26px;animation-delay:-2s">✦</span><span class="doodle star" style="left:26%;top:18%;font-size:17px;animation-delay:-.6s">✧</span>
+      <p class="eyebrow hand">Bugün çok özel bir gün</p><h1>Canım<br>teyzem ❤️</h1><div class="intro-line"></div><p class="sub hand">Sana küçük bir sürpriz hazırladım...</p><button class="start-btn" id="start">Başlayalım ✨</button>
+    </section>
+    <section class="scene warm" id="scene2" aria-label="Kutlama başlangıcı"><p class="eyebrow hand">Şşşt... küçük bir sır</p><h2 class="transition-copy">Bugün güzel bir şey kutlamak için bahanemiz var. 🎉</h2><div class="sticker-row" aria-hidden="true"><span class="sticker">🎈</span><span class="sticker">🎊</span><span class="sticker">🌷</span></div><p class="sub hand" style="margin-top:0">Hazırlan, tatlı bir dilek zamanı!</p></section>
+    <section class="scene cake-scene" id="scene3" aria-label="Doğum günü pastası"><button class="tap-zone" id="blow" aria-label="Mumları söndürmek için pastaya dokun"></button><div class="cake-wrap" aria-hidden="true"><svg viewBox="0 0 390 340"><ellipse cx="195" cy="304" rx="146" ry="22" fill="#b88da9" opacity=".22"/><path d="M72 276 Q195 302 318 276 L329 300 Q195 326 61 300Z" fill="#8dd2c7" stroke="#62425a" stroke-width="3"/><path d="M79 195 Q195 211 311 195 L300 276 Q195 297 90 276Z" fill="#ff9bb6" stroke="#62425a" stroke-width="4"/><path d="M80 198 Q107 181 132 199 Q159 177 188 198 Q221 177 250 199 Q280 180 311 197 L307 218 Q278 205 252 220 Q221 199 190 218 Q158 200 130 219 Q103 204 83 219Z" fill="#fff8db" stroke="#62425a" stroke-width="3"/><path d="M101 224v35m42-30v42m48-44v43m47-43v31" stroke="#e66793" stroke-width="6" stroke-linecap="round" opacity=".75"/><path d="M111 160 Q195 178 280 160 L309 198 Q195 216 81 198Z" fill="#ffc972" stroke="#62425a" stroke-width="4"/><path d="M83 165 Q107 145 132 165 Q158 143 190 165 Q221 143 251 165 Q278 144 304 165 L311 187 Q278 176 251 189 Q222 170 190 188 Q158 170 131 189 Q103 175 80 187Z" fill="#fff9df" stroke="#62425a" stroke-width="3"/><g><path d="M118 151V108h14v43" fill="#b6dfd6" stroke="#62425a" stroke-width="3"/><path class="flame" d="M125 105 C105 87 122 65 127 51 C145 72 151 91 132 105Z" fill="#ffb542" stroke="#62425a" stroke-width="3"/><path class="smoke" d="M127 86q-20-18 2-36q18 15 1 28" fill="none" stroke="#ae9fac" stroke-width="5" stroke-linecap="round"/><path d="M188 157V105h14v51" fill="#d6b9ff" stroke="#62425a" stroke-width="3"/><path class="flame f2" d="M195 102 C176 82 192 60 198 46 C216 68 220 87 203 103Z" fill="#ffb542" stroke="#62425a" stroke-width="3"/><path class="smoke" d="M197 85q-20-18 2-36q18 15 1 28" fill="none" stroke="#ae9fac" stroke-width="5" stroke-linecap="round"/><path d="M258 151V108h14v43" fill="#b6dfd6" stroke="#62425a" stroke-width="3"/><path class="flame f3" d="M265 105 C246 86 261 67 268 51 C285 74 291 91 272 105Z" fill="#ffb542" stroke="#62425a" stroke-width="3"/><path class="smoke" d="M267 86q-20-18 2-36q18 15 1 28" fill="none" stroke="#ae9fac" stroke-width="5" stroke-linecap="round"/></g><circle cx="105" cy="179" r="8" fill="#ec698e" stroke="#62425a" stroke-width="2"/><circle cx="152" cy="184" r="8" fill="#ed698f" stroke="#62425a" stroke-width="2"/><circle cx="228" cy="183" r="8" fill="#ed698f" stroke="#62425a" stroke-width="2"/><circle cx="280" cy="178" r="8" fill="#ed698f" stroke="#62425a" stroke-width="2"/><text x="195" y="250" text-anchor="middle" font-size="26" font-family="Georgia" fill="#fff9e7" font-weight="bold">İYİ Kİ</text></svg></div><p class="cake-prompt" id="cakePrompt">Bir dilek tut... ✨</p><p class="cake-hint" id="cakeHint">Hazırsan mumları üfle! 💨</p></section>
+    <section class="scene message-scene" id="scene4" aria-label="Doğum günü mesajı"><span class="doodle star" style="left:9%;top:11%;font-size:20px">✦</span><span class="doodle heart" style="right:10%;top:14%;font-size:22px;animation-delay:-1.5s">♥</span><article class="message-card"><div id="letter"></div><div class="next-gift" id="giftCue">Ama küçük bir şey daha var... ↓</div></article></section>
+    <section class="scene final-scene" id="scene5" aria-label="Sürpriz hediye"><span class="doodle star" style="left:13%;top:15%;font-size:27px">✦</span><span class="doodle heart" style="right:12%;top:19%;font-size:30px;animation-delay:-2s">♥</span><span class="doodle star" style="right:20%;bottom:16%;font-size:20px;animation-delay:-.8s">✧</span><div class="gift-stage" id="giftStage"><p class="gift-label hand">Bir hediyem var... 🎁</p><button class="gift" id="gift" aria-label="Hediyeyi aç"><span class="gift-base"></span><span class="lid"></span><span class="bow left"></span><span class="bow right"></span></button></div><div class="final-message" id="finalMessage"><p class="hand">Asıl hediyem belki bir kutuya sığmaz...<br><br>Seni sevdiğimi ve iyi ki benim teyzem olduğunu hatırlatmak istedim. ❤️<br><br>İyi ki doğdun Canım teyzem.</p><div class="big-final">🎉 İYİ Kİ DOĞDUN 🎉</div></div></section>
+  </main>
+  <script>
+    const $=s=>document.querySelector(s), scenes=[...document.querySelectorAll('.scene')]; let blown=false;
+    let audioContext, masterGain, muted=false, previousScene='scene1', lastSound={};
+    function audioOn(){if(!audioContext){const C=window.AudioContext||window.webkitAudioContext;if(!C)return false;audioContext=new C();masterGain=audioContext.createGain();masterGain.gain.value=.38;masterGain.connect(audioContext.destination)}if(audioContext.state==='suspended')audioContext.resume();return true}
+    function allowed(n,g=350){let now=performance.now();if(muted||!audioContext||(lastSound[n]&&now-lastSound[n]<g))return false;lastSound[n]=now;return true}
+    function ping(f,t,d=.28,v=.04,type='sine'){let o=audioContext.createOscillator(),g=audioContext.createGain();o.type=type;o.frequency.value=f;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(v,t+.015);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g).connect(masterGain);o.start(t);o.stop(t+d+.02)}
+    function puff(t,d=.14,v=.025){let b=audioContext.createBuffer(1,audioContext.sampleRate*d,audioContext.sampleRate),a=b.getChannelData(0),s=audioContext.createBufferSource(),g=audioContext.createGain();for(let i=0;i<a.length;i++)a[i]=(Math.random()*2-1)*(1-i/a.length);g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);s.buffer=b;s.connect(g).connect(masterGain);s.start(t);s.stop(t+d)}
+    function playOpeningSound(){if(!allowed('opening',700))return;let t=audioContext.currentTime;[523,659,784,1047].forEach((f,i)=>ping(f,t+i*.1,.38,.045))}
+    function playTransitionSound(){if(!allowed('transition',400))return;let t=audioContext.currentTime;puff(t,.12,.012);ping(330,t,.15,.016,'triangle')}
+    function playCandleSound(){if(!allowed('candle',500))return;let t=audioContext.currentTime;[1047,1319,1568].forEach((f,i)=>ping(f,t+i*.07,.3,.027))}
+    function playBlowSound(){if(!allowed('blow',650))return;let t=audioContext.currentTime;puff(t,.25,.045);ping(988,t+.28,.23,.024)}
+    function playConfettiSound(){if(!allowed('confetti',700))return;let t=audioContext.currentTime;puff(t,.09,.055);[880,1175,1480].forEach((f,i)=>ping(f,t+.08+i*.05,.14,.02,'triangle'))}
+    function playGiftSound(){if(!allowed('gift',650))return;let t=audioContext.currentTime;puff(t,.07,.04);[784,1175,1568].forEach((f,i)=>ping(f,t+.08+i*.07,.32,.027))}
+    function playFinalSound(){if(!allowed('final',850))return;let t=audioContext.currentTime;[523,659,784,1047,1319].forEach((f,i)=>ping(f,t+i*.09,.38,.035,'triangle'))}
+    function playMessageAmbient(){}
+    $('#soundToggle').addEventListener('click',()=>{audioOn();muted=!muted;masterGain.gain.setTargetAtTime(muted?.0001:.38,audioContext.currentTime,.03);$('#soundToggle').textContent=muted?'🔇':'🔊'});    function show(id){if(id!==previousScene&&audioContext)playTransitionSound();scenes.forEach(s=>s.classList.toggle('active',s.id===id));previousScene=id;}
+    const canvas=$('#fx'),ctx=canvas.getContext('2d'),bits=[];
+    function resize(){const r=canvas.getBoundingClientRect(),d=devicePixelRatio||1;canvas.width=r.width*d;canvas.height=r.height*d;ctx.setTransform(d,0,0,d,0,0)} addEventListener('resize',resize);resize();
+    function burst(amount=90){const r=canvas.getBoundingClientRect(),cx=r.width/2,cy=r.height*.48,colors=['#f26f96','#ffca59','#8ccfc4','#b8a0ef','#fff7d3'];for(let i=0;i<amount;i++){const a=Math.random()*Math.PI*2,sp=2+Math.random()*7;bits.push({x:cx,y:cy,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-2,life:70+Math.random()*50,c:colors[i%colors.length],size:4+Math.random()*6,heart:i%6===0,rot:Math.random()*6});} if(!animating)animate();}
+    let animating=false;function animate(){animating=true;const r=canvas.getBoundingClientRect();ctx.clearRect(0,0,r.width,r.height);for(let i=bits.length-1;i>=0;i--){const b=bits[i];b.x+=b.vx;b.y+=b.vy;b.vy+=.11;b.vx*=.992;b.life--;ctx.save();ctx.globalAlpha=Math.max(0,b.life/85);ctx.translate(b.x,b.y);ctx.rotate(b.rot+=.07);ctx.fillStyle=b.c;if(b.heart){ctx.beginPath();ctx.moveTo(0,4);ctx.bezierCurveTo(-13,-5,-7,-13,0,-6);ctx.bezierCurveTo(7,-13,13,-5,0,4);ctx.fill()}else{ctx.fillRect(-b.size/2,-b.size/2,b.size,b.size*.65)}ctx.restore();if(b.life<=0||b.y>r.height+20)bits.splice(i,1);}if(bits.length)requestAnimationFrame(animate);else{animating=false;ctx.clearRect(0,0,r.width,r.height)}}
+    $('#start').addEventListener('click',()=>{burst(85);show('scene2');setTimeout(()=>{burst(50);show('scene3')},1850)});
+    $('#blow').addEventListener('click',()=>{if(blown)return;blown=true;$('#scene3').classList.add('blown');$('#cakePrompt').textContent='Dileğin gökyüzüne uçtu! ✨';$('#cakeHint').textContent='';burst(145);setTimeout(playConfettiSound,160);setTimeout(()=>{show('scene4');typeLetter()},1750)});
+    const paragraphs=["Canım teyzem ❤️","Hayatı güzelleştiren şeylerden biri de güzel insanların hayatımızda olması…\nSen de benim için her zaman o güzel insanlardan biri oldun. 🌸","Yeni yaşında yüzünden gülümseme, kalbinden huzur hiç eksik olmasın.\nBirlikte daha nice güzel anılarımız, kahkahalarımız ve unutulmayacak günlerimiz olsun. ❤️","İyi ki varsın, iyi ki benim teyzemsin.","Doğum günün kutlu olsun Canım teyzem! 🎂🎉❤️"];
+    function typeLetter(){const el=$('#letter');paragraphs.forEach((p,i)=>{const span=document.createElement('span');span.className='typed-line';span.style.animationDelay=(i*.95)+'s';span.textContent=p;span.style.marginBottom=i===0?'16px':'18px';el.appendChild(span)});setTimeout(()=>{ $('#giftCue').style.opacity=1; show('scene5'); },paragraphs.length*950+900)}
+    $('#gift').addEventListener('click',()=>{const stage=$('#giftStage');if(stage.classList.contains('opened'))return;playGiftSound();stage.classList.add('opened');$('#finalMessage').classList.add('show');burst(175);setTimeout(playFinalSound,340);setTimeout(playConfettiSound,500)});
+  </script>
+</body>
+</html>
